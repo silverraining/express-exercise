@@ -24,20 +24,18 @@ app.get("/api/items", (req, res) => {
   ]);
 });
 
-app.listen(port, () => {
-  console.log(`Server is running at http://localhost:${port}`);
-});
+// app.use((err, req, res, next) => {
+//   console.error(err.stack); // 에러 로그 기록 (중요!)
 
-app.use((err, req, res, next) => {
-  console.error(err.stack); // 에러 로그 기록 (중요!)
+//   // 에러 종류에 따라 상태 코드와 메시지 분기 가능
+//   const statusCode = err.statusCode || 500;
+//   const message = err.message || "서버 내부 오류가 발생했습니다.";
+//   res.status(statusCode).json({
+//     status: "error",
+//     message: message,
+//     // 개발 환경에서만 스택 정보 포함 (선택 사항)
+//     // stack: process.env.NODE_ENV === 'development' ? err.stack : undefined,
+//   });
+// });
 
-  // 에러 종류에 따라 상태 코드와 메시지 분기 가능
-  const statusCode = err.statusCode || 500;
-  const message = err.message || "서버 내부 오류가 발생했습니다.";
-  res.status(statusCode).json({
-    status: "error",
-    message: message,
-    // 개발 환경에서만 스택 정보 포함 (선택 사항)
-    // stack: process.env.NODE_ENV === 'development' ? err.stack : undefined,
-  });
-});
+module.exports = app; // app.js 파일을 모듈로 내보냄
